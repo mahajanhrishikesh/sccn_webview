@@ -4,7 +4,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'dart:async';
 import 'package:flare_splash_screen/flare_splash_screen.dart';
 import 'dart:io';
-import 'package:catcher/catcher.dart';
+import 'package:catcher/catcher_plugin.dart';
 
 
 const String homeUrl = 'https://creationdevs.in/sccn/homepagewebview.php';
@@ -56,7 +56,8 @@ class _HomePageState extends State<HomePage> {
       }
     } on SocketException catch (_) {
       connectionStatus = false;
-      return await _loadLocalHTML();
+      var webpage = await _loadLocalHTML();
+      return webpage;
     }
   }
 
@@ -69,7 +70,14 @@ class _HomePageState extends State<HomePage> {
           //snapshot is data returned by check()
           if (connectionStatus == true) {
             //if Internet is connected
-            return SafeArea(child: WebviewScaffold(url: homeUrl));
+            return SafeArea(child:
+              WebviewScaffold(
+                  url: homeUrl,
+                  initialChild: Center(child:Container(
+                    child: Image.asset('assets/images/sccn_logo.png', color: Colors.black,),
+                  )),
+              )
+            );
           } else {
             //If internet is not connected
             return SafeArea(
@@ -79,6 +87,9 @@ class _HomePageState extends State<HomePage> {
                             snapshot.data,
                             mimeType: 'text/html')
                         .toString(),
+                  initialChild: Center(child:Container(
+                    child: Image.asset('assets/images/sccn_logo.png', color: Colors.black,),
+                  )),
                 ));
           }
         });
