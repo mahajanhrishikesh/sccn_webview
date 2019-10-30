@@ -10,19 +10,19 @@ const String homeUrl = 'https://creationdevs.in/sccn/homepagewebview.php';
 void main() {
   ErrorWidget.builder = (FlutterErrorDetails details) => MaterialApp(
           home: Scaffold(
-            body: Center(
-              child: Container(
-                child: Text(
-                  "Loading...",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24,
-                  ),
-                ),
-                color: Color(0xffC1FBCE),
+        body: Center(
+          child: Container(
+            child: Text(
+              "Loading...",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 24,
               ),
             ),
-          ));
+            color: Color(0xffC1FBCE),
+          ),
+        ),
+      ));
   runApp(MyApp());
 }
 
@@ -55,7 +55,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool connectionStatus; //variable for checking if we are connected to the internet
+  bool
+      connectionStatus; //variable for checking if we are connected to the internet
 
   Future check() async {
     try {
