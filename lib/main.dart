@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: SplashScreen(
         'assets/finallyfinal.flr', //Animation file
@@ -73,7 +74,26 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  final flutterWebviewPlugin = new FlutterWebviewPlugin();
+  // Instance of WebView plugin
+  FlutterWebviewPlugin flutterWebviewPlugin = FlutterWebviewPlugin();
+
+  @override
+  void initState(){
+    super.initState();
+
+    flutterWebviewPlugin.onUrlChanged.listen((String url){
+      setState(() {
+        if(url != homeUrl) {
+          flutterWebviewPlugin.reloadUrl(homeUrl);
+        }
+        else{
+          debugPrint("OKay");
+        }
+      });
+    });
+
+  }
+
 
   Widget build(BuildContext context) {
     return FutureBuilder(
