@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Carbon Campus Footprint',
       home: SplashScreen(
         'assets/finallyfinal.flr', //Animation file
         HomePage(), //screen to load after animation
@@ -131,9 +131,18 @@ class _HomePageState extends State<HomePage> {
           }
         });
   }
+
+  @override
+  void dispose(){
+    super.dispose();
+    flutterWebviewPlugin.dispose();
+  }
+
 }
 
 Future<String> _loadLocalHTML() async {
   var webPage = await rootBundle.loadString('assets/html_code.html');
   return webPage;
 }
+
+
