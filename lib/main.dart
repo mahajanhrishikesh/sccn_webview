@@ -56,8 +56,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool
-      connectionStatus; //variable for checking if we are connected to the internet
+  bool connectionStatus; //variable for checking if we are connected to the internet
 
   Future check() async {
     try {
@@ -83,7 +82,7 @@ class _HomePageState extends State<HomePage> {
 
     flutterWebviewPlugin.onUrlChanged.listen((String url){
       setState(() {
-        if(url != homeUrl) {
+        if(url != homeUrl && connectionStatus == true) {
           flutterWebviewPlugin.reloadUrl(homeUrl);
         }
         else{
